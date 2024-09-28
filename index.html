@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhagavad Gita</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+        </style>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Share+Tech&family=Uncial+Antiqua&display=swap');
+            </style>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+    </style>      
+</head>
+<body>
+    <main id="one">
+    <div class="container">
+        <h1 class="main-heading">BHAGAVAD GITA</h1>
+        <h2 class="quote">"The spirit is beyond destruction. <p></p>No one can bring an end to spirit which is everlasting.”</h2>
+    </div>
+    <div class="last-text">
+        <h3 class="footer-text">Simplify Your Spiritual Journey<br>
+            Explore the Bhagavad Gita with Our API.
+        </h3>
+     </div> 
+    </main> 
+     <main id="two">
+        <div class="input-container">
+            <input type="text" placeholder="Enter Chapter" class="input-ch">
+            <input type="text" placeholder="Enter Verse" class="input-verse">
+            <button onclick="Checking()"> Find </button>
+            <input type="text" placeholder="Name" class="name-of-ch" readonly>
+        </div>
+        <div class="output-container">
+            <textarea type="text" placeholder="Verse and Shlok" class="Shlok" readonly></textarea>
+            <button class="ch-box"><span>0</span><p>Chapter</p></button> 
+             <button class="verse-box"><span>0</span><p>Verse</p></button> 
+        </div>
+        <div class="main-content">
+            <textarea type="text" class="hindi" placeholder="Hindi Translation / Summary" readonly></textarea>
+            <textarea type="text" class="english" placeholder="English Translation / Summary" readonly></textarea>
+        </div>
+        <div class="warning">
+            <p class="CH-warning">*Please Enter Chapter Number</p>
+            <p class="verse-warning">*Please Enter Verse Number</p>
+        </div>
+        <div class="summary">
+            <p>* If you want the Summary of the Chapter,<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;then Type <span>NO</span> in <strong>Verse Box</strong></p>
+        </div>
+    </main> 
+    <script src="script.js"></script>
+</body>
+</html>
