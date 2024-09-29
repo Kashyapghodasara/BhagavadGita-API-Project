@@ -1,2 +1,4 @@
 # BhagavadGita-API-Project
-This project involves an API built with HTML, CSS and JavaScript. displaying the Chapter, Verse, and Translation. If you don’t select a specific verse number, the console will show a summary of the chapter.
+This project build with HTML CSS and JAVASCRIPT.
+
+The Bhagavad Gita API offers insights into the verses, chapters, and shlokas of the Bhagavad Gita, complete with translations in both English and Hindi. This resource provides a deeper understanding of the text, making its wisdom accessible to a wider audience.
