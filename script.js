@@ -1,11 +1,11 @@
 // Day 1 : 26-sep-24 (1.5hrs)
-// Day 2 : 28-sep-24 (2 hrs)
+// Day 2 : 28-sep-24 (2 hrs + 1 hrs) 
 
 const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': '453284a699msh9c633f8e4325c75p1753cajsn1f3e4ce797f5',
-        'x-rapidapi-host': 'bhagavad-gita3.p.rapidapi.com'
+        'x-rapidapi-key': '(Enter your Key)',
+        'x-rapidapi-host: '(Enter your Host name)'
     }
 };
 
