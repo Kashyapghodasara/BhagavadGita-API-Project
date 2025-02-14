@@ -4,10 +4,11 @@
 const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': '(Enter your Key)',
-        'x-rapidapi-host: '(Enter your Host name)'
+        'x-rapidapi-key': '(Your API Key Here)',
+        'x-rapidapi-host': '(Your Host Name Here)'
     }
 };
+
 
 function Checking() {
     let chapter = document.getElementsByClassName("input-ch")[0].value;
