@@ -1,14 +1,13 @@
 // Day 1 : 26-sep-24 (1.5hrs)
-// Day 2 : 28-sep-24 (2 hrs + 1 hrs) 
+// Day 2 : 28-sep-24 (2 hrs)
 
 const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': 'your_actual_api_key',
+        'x-rapidapi-key': '453284a699msh9c633f8e4325c75p1753cajsn1f3e4ce797f5',
         'x-rapidapi-host': 'bhagavad-gita3.p.rapidapi.com'
     }
 };
-
 
 function Checking() {
     let chapter = document.getElementsByClassName("input-ch")[0].value;
@@ -135,29 +134,51 @@ async function findValues() {
     const verses = document.getElementsByClassName("input-verse")[0].value;
 
     try {
-        const url = `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chapter}/verses/${verses}`;
-        const response = await fetch(url, options);
+        // Check if chapter is between 0 and 18, and verses is Number
+            const url = `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chapter}/verses/${verses}/`;;
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
 
-        console.log(`Fetching: ${url}`);
+            // Parse the JSON data
+            const data = await response.json();
+            console.log(data);
+          
+            chapterName();
 
-        if (!response.ok) {
-            console.error(`Error: ${response.status} - ${response.statusText}`);
-            throw new Error(`HTTP Error: ${response.status}`);
-        }
+              for (const [key, value] of Object.entries(data)) {
+                   
 
-        const data = await response.json();
-        console.log("API Response:", data);
-
-        document.querySelector(".Shlok").innerHTML = data.text || "No data found";
-        document.querySelector(".ch-box span").innerText = data.chapter_number || "N/A";
-        document.querySelector(".verse-box span").innerText = data.verse_number || "N/A";
-        
-        if (data.translations && data.translations.length > 0) {
-            document.querySelector(".english").value = data.translations[0]?.description || "No translation found";
-            document.querySelector(".hindi").value = data.translations[5]?.description || "No Hindi translation";
-        }
-    } catch (error) {
-        console.error('Error:', error);
+                if (key === "chapter_number") {
+                    console.log(`key = ${key}, \nvalue = ${value}`);
+                    document.querySelector(".ch-box span").innerText = `${value}`;
+                }
+                           
+                if (key === "verse_number") {
+                    console.log(`key = ${key}, \nvalue = ${value}`);
+                    // Target the span inside the button
+                    document.querySelector(".verse-box span").innerText = `${value}`;
+                }
+                if (key === "text") {
+                    console.log(`key = ${key}, \nvalue = ${value}`);
+                
+                    // Split the value by "|" and join with "<br>" for line breaks
+                    const formattedValue = value.split("|").map(line => line.trim()).join('<br>');
+                
+                    // Set the inner HTML of the element with class "Shlok"
+                    document.querySelector(".Shlok").innerHTML = formattedValue;
+                }
+                // continue with this...
+                if (key === "translations") {
+                    console.log(`key = ${key}, \nvalue = ${value}`);
+                    document.querySelector(".english").value= `${value[0].description}`;
+                    document.querySelector(".hindi").value = `${value[5].description}`;
+                }
+            }
+    } 
+    catch (error) {
+        console.error('Error:', error);  // Catch and log any errors
     }
 }
 document.addEventListener('keypress', function(event) {
