@@ -4,8 +4,8 @@
 const options = {
     method: 'GET',
     headers: {
-        'x-rapidapi-key': '(Your API Key Here)',
-        'x-rapidapi-host': '(Your Host Name Here)'
+        'x-rapidapi-key': 'your_actual_api_key',
+        'x-rapidapi-host': 'bhagavad-gita3.p.rapidapi.com'
     }
 };
 
@@ -135,51 +135,29 @@ async function findValues() {
     const verses = document.getElementsByClassName("input-verse")[0].value;
 
     try {
-        // Check if chapter is between 0 and 18, and verses is Number
-            const url = `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chapter}/verses/${verses}/`;;
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
+        const url = `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chapter}/verses/${verses}`;
+        const response = await fetch(url, options);
 
-            // Parse the JSON data
-            const data = await response.json();
-            console.log(data);
-          
-            chapterName();
+        console.log(`Fetching: ${url}`);
 
-              for (const [key, value] of Object.entries(data)) {
-                   
+        if (!response.ok) {
+            console.error(`Error: ${response.status} - ${response.statusText}`);
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
 
-                if (key === "chapter_number") {
-                    console.log(`key = ${key}, \nvalue = ${value}`);
-                    document.querySelector(".ch-box span").innerText = `${value}`;
-                }
-                           
-                if (key === "verse_number") {
-                    console.log(`key = ${key}, \nvalue = ${value}`);
-                    // Target the span inside the button
-                    document.querySelector(".verse-box span").innerText = `${value}`;
-                }
-                if (key === "text") {
-                    console.log(`key = ${key}, \nvalue = ${value}`);
-                
-                    // Split the value by "|" and join with "<br>" for line breaks
-                    const formattedValue = value.split("|").map(line => line.trim()).join('<br>');
-                
-                    // Set the inner HTML of the element with class "Shlok"
-                    document.querySelector(".Shlok").innerHTML = formattedValue;
-                }
-                // continue with this...
-                if (key === "translations") {
-                    console.log(`key = ${key}, \nvalue = ${value}`);
-                    document.querySelector(".english").value= `${value[0].description}`;
-                    document.querySelector(".hindi").value = `${value[5].description}`;
-                }
-            }
-    } 
-    catch (error) {
-        console.error('Error:', error);  // Catch and log any errors
+        const data = await response.json();
+        console.log("API Response:", data);
+
+        document.querySelector(".Shlok").innerHTML = data.text || "No data found";
+        document.querySelector(".ch-box span").innerText = data.chapter_number || "N/A";
+        document.querySelector(".verse-box span").innerText = data.verse_number || "N/A";
+        
+        if (data.translations && data.translations.length > 0) {
+            document.querySelector(".english").value = data.translations[0]?.description || "No translation found";
+            document.querySelector(".hindi").value = data.translations[5]?.description || "No Hindi translation";
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
 document.addEventListener('keypress', function(event) {
